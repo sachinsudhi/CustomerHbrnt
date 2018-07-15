@@ -3,38 +3,110 @@ package trng.hibernat.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import trng.hibernat.utils.HibernateUtils;
 import trng.hibernat.Entity.Customer;
 import trng.hibernat.beans.*;
 
 public class CustomerDaoImplementation implements CustomerDao{
+	SessionFactory sf;
+	final static Logger logger = Logger.getLogger(CustomerDaoImplementation.class);
 
 	@Override
 	public boolean addCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return false;
+		logger.debug("Executing CustomerDao::addCustomer API" + customer.getCustomerID());
+    	sf = HibernateUtils.getSessionFactory();
+        Session session = sf.openSession();
+        
+        Transaction transaction = session.beginTransaction();
+        
+        try {
+			session.save(customer);
+			transaction.commit();
+		} catch (Exception e) {
+			logger.error("failed to execute addCustomer method", e);
+			return false;
+		}
+        session.close();
+        logger.debug("Completed executing CustomerDao::addCustomer API");
+		return true;
 	}
 
 	@Override
 	public boolean deleteCustomer(int customerId) {
-		// TODO Auto-generated method stub
-		return false;
+		sf = HibernateUtils.getSessionFactory();
+        Session session = sf.openSession();
+        
+        session.beginTransaction();
+        try {
+        Customer customer = (Customer) session.load(Customer.class, customerId);
+        session.delete(customer);
+        session.getTransaction().commit();
+        }catch(Exception e) {
+        	logger.error("failed to execute deleteCustomer method", e);
+        	return false;
+        }
+        session.close();
+		return true;
 	}
 
 	@Override
 	public boolean updateCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return false;
+		sf = HibernateUtils.getSessionFactory();
+        Session session = sf.openSession();
+        
+        session.beginTransaction();
+        try {
+        session.update(customer);
+        session.getTransaction().commit();
+        }catch(Exception e) {
+        	logger.error("failed to execute deleteCustomer method", e);
+        	return false;
+        }
+        session.close();
+		return true;
 	}
 
 	@Override
 	public Customer loadCustomer(int customerId) {
-		// TODO Auto-generated method stub
-		return null;
+		sf = HibernateUtils.getSessionFactory();
+        Session session = sf.openSession();
+      
+        session.beginTransaction();
+        Customer customer;
+        try {
+        customer = (Customer) session.get(Customer.class, customerId);
+        session.getTransaction().commit();
+        }catch(Exception e) {
+        	logger.error("failed to execute deleteCustomer method", e);
+        	return null;
+        }
+        session.close();
+		return customer;
 	}
 
 	@Override
 	public List<Customer> getCustomers(String zipCode) {
-		// TODO Auto-generated method stub
+		sf = HibernateUtils.getSessionFactory();
+        Session session = sf.openSession();
+        
+        session.beginTransaction();
+        
+        Query query =  session.createQuery("FROM Customers where shippingZip=:zip");
+        query.setParameter("zip", zipCode);
+        List<Customer> customersList = query.list();
+        
+        session.getTransaction().commit();
+        session.close();
+        
+        if (customersList != null && customersList.size() > 0) {
+        	return customersList;
+        }
 		return null;
 	}
 
