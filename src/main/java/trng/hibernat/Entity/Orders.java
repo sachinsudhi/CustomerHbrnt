@@ -21,7 +21,7 @@ import lombok.Data;
 @Table(name="Orders")
 
 @Data
-public class Order {
+public class Orders {
 	@Id
 	@GeneratedValue
 	@Column(name="order_id")
@@ -49,16 +49,16 @@ public class Order {
 	@JoinColumn(name="order_id_fk")
 	private List<OrderProducts> op;
 
-	public Order() {
+	public Orders() {
 		super();
 	}
 	
-	public Order(int orderID) {
+	public Orders(int orderID) {
 		super();
 		this.orderID = orderID;
 	}
 	
-	public Order(int orderID, int customerID, Date invoiceCreationDate, Date deliveryDueDate, Date paymentDueDate,
+	public Orders(int orderID, int customerID, Date invoiceCreationDate, Date deliveryDueDate, Date paymentDueDate,
 			String customMessage) {
 		super();
 		this.orderID = orderID;
@@ -69,7 +69,7 @@ public class Order {
 		this.customMessage = customMessage;
 	}
 
-	public Order(int orderID, int customerID, Date invoiceCreationDate, Date deliveryDueDate, Date paymentDueDate,
+	public Orders(int orderID, int customerID, Date invoiceCreationDate, Date deliveryDueDate, Date paymentDueDate,
 			String customMessage, List<OrderProducts> op) {
 		super();
 		this.orderID = orderID;

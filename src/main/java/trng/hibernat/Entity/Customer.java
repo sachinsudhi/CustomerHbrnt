@@ -62,7 +62,7 @@ public final class Customer {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer_id_fk")
-	private List<Order> orders;
+	private List<Orders> orders;
 
 	@Embedded
 	@AttributeOverrides(value = { @AttributeOverride(name = "billingStreet", column = @Column(name = "bill_street")),
@@ -81,7 +81,7 @@ public final class Customer {
 		super();
 	}
 
-	public Customer(int customerID, String firstName, String middleName, String lastName, List<Order> order,
+	public Customer(int customerID, String firstName, String middleName, String lastName, List<Orders> order,
 			Address address) {
 		super();
 		this.customerID = customerID;
@@ -110,7 +110,7 @@ public final class Customer {
 
 	public Customer(int customerID, String title, String firstName, String middleName, String lastName, String suffix,
 			String email, String company, String displayName, String printOnCheckAs, String otherDetails,
-			List<Order> order) {
+			List<Orders> order) {
 		super();
 		this.customerID = customerID;
 		this.title = title;
@@ -128,7 +128,7 @@ public final class Customer {
 
 	public Customer(int customerID, String title, String firstName, String middleName, String lastName, String suffix,
 			String email, String company, String displayName, String printOnCheckAs, String otherDetails,
-			List<Order> order, Address address) {
+			List<Orders> order, Address address) {
 		super();
 		this.customerID = customerID;
 		this.title = title;

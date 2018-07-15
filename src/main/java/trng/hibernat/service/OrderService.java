@@ -1,13 +1,13 @@
 package trng.hibernat.service;
 
-import trng.hibernat.Entity.Order;
+import trng.hibernat.Entity.Orders;
 
 public interface OrderService {
-	boolean createOrder(Order order);
+	boolean createOrder(Orders order);
 
 	boolean deleteOrder(Long orderId);
 
-	boolean updateOrder(Order order);
+	boolean updateOrder(Orders order);
 
-	Order getOrder(Order order);
+	Orders getOrder(Orders order);
 }

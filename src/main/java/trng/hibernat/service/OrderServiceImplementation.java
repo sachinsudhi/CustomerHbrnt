@@ -1,6 +1,6 @@
 package trng.hibernat.service;
 
-import trng.hibernat.Entity.Order;
+import trng.hibernat.Entity.Orders;
 import trng.hibernat.dao.OrderDao;
 import trng.hibernat.dao.OrderDaoImplementation;
 
@@ -10,7 +10,7 @@ public class OrderServiceImplementation implements OrderService{
 		odao=new OrderDaoImplementation();
 	}
 	@Override
-	public boolean createOrder(Order order) {
+	public boolean createOrder(Orders order) {
 		return odao.createOrder(order);
 	}
 
@@ -20,12 +20,12 @@ public class OrderServiceImplementation implements OrderService{
 	}
 
 	@Override
-	public boolean updateOrder(Order order) {
+	public boolean updateOrder(Orders order) {
 		return odao.updateOrder(order);
 	}
 
 	@Override
-	public Order getOrder(Order order) {
+	public Orders getOrder(Orders order) {
 		return odao.getOrder(order);
 	}
 	

@@ -28,7 +28,7 @@
 
 		<!-- Include all the mapping pojo classes -->
    		<mapping class="trng.hibernat.Entity.Customer" />
-		<mapping class="trng.hibernat.Entity.Order" />
+		<mapping class="trng.hibernat.Entity.Orders" />
 		<mapping class="trng.hibernat.Entity.OrderProducts" />
 	</session-factory> 
 </hibernate-configuration>

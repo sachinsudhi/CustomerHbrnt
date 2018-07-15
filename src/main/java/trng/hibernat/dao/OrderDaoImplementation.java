@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import trng.hibernat.Entity.Order;
+import trng.hibernat.Entity.Orders;
 import trng.hibernat.utils.HibernateUtils;
 
 public class OrderDaoImplementation implements OrderDao{
@@ -20,7 +20,7 @@ public class OrderDaoImplementation implements OrderDao{
 	}
 
 	@Override
-	public boolean createOrder(Order order) {
+	public boolean createOrder(Orders order) {
 		logger.debug("Executing OrderDao::addOrder API" + order.getOrderID());
 		sf = HibernateUtils.getSessionFactory();
 		Session session = sf.openSession();
@@ -46,7 +46,7 @@ public class OrderDaoImplementation implements OrderDao{
 
 		session.beginTransaction();
 		try {
-			Order order = (Order) session.load(Order.class, orderId);
+			Orders order = (Orders) session.load(Orders.class, orderId);
 			session.delete(order);
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -58,7 +58,7 @@ public class OrderDaoImplementation implements OrderDao{
 	}
 
 	@Override
-	public boolean updateOrder(Order order) {
+	public boolean updateOrder(Orders order) {
 		sf = HibernateUtils.getSessionFactory();
 		Session session = sf.openSession();
 
@@ -75,7 +75,7 @@ public class OrderDaoImplementation implements OrderDao{
 	}
 
 	@Override
-	public Order getOrder(Order order) {
+	public Orders getOrder(Orders order) {
 		sf = HibernateUtils.getSessionFactory();
 		Session session = sf.openSession();
 
@@ -84,7 +84,7 @@ public class OrderDaoImplementation implements OrderDao{
 		Query query = session.createQuery("FROM ORDER where orderID=:ord");
 		query.setParameter("ord", orderId);
 		@SuppressWarnings("unchecked")
-		List<Order> ordersList = query.list();
+		List<Orders> ordersList = query.list();
 
 		session.getTransaction().commit();
 		session.close();

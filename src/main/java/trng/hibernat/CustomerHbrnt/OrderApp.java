@@ -1,13 +1,10 @@
 package trng.hibernat.CustomerHbrnt;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
-import trng.hibernat.Entity.Order;
+import trng.hibernat.Entity.Orders;
 import trng.hibernat.service.OrderService;
 import trng.hibernat.service.OrderServiceImplementation;
 import trng.hibernat.utils.HibernateUtils;
@@ -59,7 +56,7 @@ public class OrderApp {
 		System.out.println("\nEnter order message:\n");
 		String message = scanner.next();
 		Date d = Calendar.getInstance().getTime();
-		Order ord = new Order(oid, cid, d, d, d, message);
+		Orders ord = new Orders(oid, cid, d, d, d, message);
 		oserv.createOrder(ord);	
 	}
 
@@ -78,7 +75,7 @@ public class OrderApp {
 		System.out.println("\nEnter order message:\n");
 		String message = scanner.next();
 		Date d = Calendar.getInstance().getTime();
-		Order ord = new Order(oid, cid, d, d, d, message);
+		Orders ord = new Orders(oid, cid, d, d, d, message);
 		boolean result=oserv.updateOrder(ord);
 	   if(result)
 		   System.out.println("Success");
@@ -89,8 +86,8 @@ public class OrderApp {
 	public void loadOrder() {
 		System.out.println("\nEnter order Id of the order to be loaded:\n");
 		int oid = scanner.nextInt();
-		Order ord=new Order(oid);
-		Order o=oserv.getOrder(ord);
+		Orders ord=new Orders(oid);
+		Orders o=oserv.getOrder(ord);
 		o.toString();
 	}
 }

@@ -32,6 +32,6 @@ public class HibernateUtils {
     }
     
     public static void displayOrderMenu() {
-    	System.out.println("1. ADD \n 2. DELETE \n 3. UPDATE \n 4. LOAD based on ID \n 5. GET an order entry by giving order object \n 6. Exit menu ");
+    	System.out.println("1. ADD \n 2. DELETE \n 3. UPDATE \n 4. GET an order entry by giving order object \n 5. Exit menu ");
     }
 }

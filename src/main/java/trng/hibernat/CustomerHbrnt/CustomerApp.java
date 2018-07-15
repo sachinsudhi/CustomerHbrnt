@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import trng.hibernat.Entity.Address;
 import trng.hibernat.Entity.Customer;
-import trng.hibernat.Entity.Order;
+import trng.hibernat.Entity.Orders;
 import trng.hibernat.service.CustomerService;
 import trng.hibernat.service.CustomerServiceImplementation;
 import trng.hibernat.utils.HibernateUtils;
@@ -87,8 +87,8 @@ public class CustomerApp {
 		System.out.println("\nEnter Country:\n");
 		String country = scanner.next();
 		Date d = Calendar.getInstance().getTime();
-		Order ord = new Order(oid, cid, d, d, d, message);
-		List<Order> od = new ArrayList<>();
+		Orders ord = new Orders(oid, cid, d, d, d, message);
+		List<Orders> od = new ArrayList<>();
 		od.add(ord);
 		Address address = new Address(street, city, state, zip, country);
 		Customer customer = new Customer(cid, cfname, cmname, clname, od, address);
@@ -128,8 +128,8 @@ public class CustomerApp {
 		System.out.println("\nEnter Country:\n");
 		String country = scanner.next();
 		Date d = Calendar.getInstance().getTime();
-		Order ord = new Order(oid, cid, d, d, d, message);
-		List<Order> od = new ArrayList<>();
+		Orders ord = new Orders(oid, cid, d, d, d, message);
+		List<Orders> od = new ArrayList<>();
 		od.add(ord);
 		Address address = new Address(street, city, state, zip, country);
 		Customer customer = new Customer(cid, cfname, cmname, clname, od, address);
