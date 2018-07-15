@@ -1,7 +1,10 @@
 package trng.hibernat.Entity;
 
+import javax.persistence.Embeddable;
+
 import lombok.Data;
 
+@Embeddable
 @Data
 public class Address{
 	private String billingStreet;

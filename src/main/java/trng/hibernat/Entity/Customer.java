@@ -2,8 +2,11 @@ package trng.hibernat.Entity;
 
 import java.util.List;
 
+import javax.persistence.AttributeOverrides;
+import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -61,6 +64,21 @@ public final class Customer{
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY) 
 	@JoinColumn(name="customer_id_fk")
 	private List<Order> orders;
+	
+	@Embedded
+    @AttributeOverrides(value = {
+        @AttributeOverride(name = "billingStreet", column = @Column(name = "bill_street")),
+        @AttributeOverride(name = "billingCity", column = @Column(name = "bill_city")),
+        @AttributeOverride(name = "billingState", column = @Column(name = "bill_state")),
+        @AttributeOverride(name = "billingZIP", column = @Column(name = "bill_zip")),
+        @AttributeOverride(name = "billingCountry", column = @Column(name = "bill_country")),
+        @AttributeOverride(name = "shippingStreet", column = @Column(name = "ship_street")),
+        @AttributeOverride(name = "shippingCity", column = @Column(name = "ship_city")),
+        @AttributeOverride(name = "shippingState", column = @Column(name = "ship_state")),
+        @AttributeOverride(name = "shippingZIP", column = @Column(name = "ship_zip")),
+        @AttributeOverride(name = "shippingCountry", column = @Column(name = "ship_country"))
+    })
+    private Address address;
 
 	public Customer() {
 		super();
@@ -99,6 +117,36 @@ public final class Customer{
 		this.printOnCheckAs = printOnCheckAs;
 		this.otherDetails = otherDetails;
 		this.orders = order;
+	}
+	
+	public Customer(int customerID, String firstName, String middleName, String lastName,
+			List<Order> order, Address address) {
+		super();
+		this.customerID = customerID;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.orders = order;
+		this.address=address;
+	}
+	
+	public Customer(int customerID, String title, String firstName, String middleName, String lastName, String suffix,
+			String email, String company, String displayName, String printOnCheckAs,  String otherDetails,
+			List<Order> order, Address address) {
+		super();
+		this.customerID = customerID;
+		this.title = title;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.suffix = suffix;
+		this.email = email;
+		this.company = company;
+		this.displayName = displayName;
+		this.printOnCheckAs = printOnCheckAs;
+		this.otherDetails = otherDetails;
+		this.orders = order;
+		this.address=address;
 	}
 
 }

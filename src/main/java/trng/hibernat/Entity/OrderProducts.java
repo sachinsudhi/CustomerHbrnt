@@ -26,9 +26,19 @@ public class OrderProducts {
 	
 	@Column(name="Quantity")
 	private int quantity;
+	
+	@Column(name="Price")
+	private double price;
 
 	public OrderProducts() {
 		super();
+	}
+	
+	public OrderProducts( int productID, int quantity, double price) {
+		super();
+		this.productID = productID;
+		this.quantity = quantity;
+		this.price=price;
 	}
 	
 	public OrderProducts(int productOrderID, int orderID, int productID, int quantity) {
