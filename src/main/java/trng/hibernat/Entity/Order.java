@@ -52,6 +52,22 @@ public class Order {
 	public Order() {
 		super();
 	}
+	
+	public Order(int orderID) {
+		super();
+		this.orderID = orderID;
+	}
+	
+	public Order(int orderID, int customerID, Date invoiceCreationDate, Date deliveryDueDate, Date paymentDueDate,
+			String customMessage) {
+		super();
+		this.orderID = orderID;
+		this.customerId = customerID;
+		this.invoiceCreationDate = invoiceCreationDate;
+		this.deliveryDueDate = deliveryDueDate;
+		this.paymentDueDate = paymentDueDate;
+		this.customMessage = customMessage;
+	}
 
 	public Order(int orderID, int customerID, Date invoiceCreationDate, Date deliveryDueDate, Date paymentDueDate,
 			String customMessage, List<OrderProducts> op) {

@@ -5,49 +5,48 @@ import java.util.Map;
 
 import trng.hibernat.Entity.Customer;
 import trng.hibernat.beans.ReportBean;
+import trng.hibernat.dao.CustomerDao;
+import trng.hibernat.dao.CustomerDaoImplementation;
 
-public class CustomerServiceImplementation implements CustomerService{
+public class CustomerServiceImplementation implements CustomerService {
+	CustomerDao cdao;
+	public CustomerServiceImplementation() {
+		cdao= new CustomerDaoImplementation();
+	}
 
 	@Override
 	public boolean addCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return false;
+		return cdao.addCustomer(customer);
 	}
 
 	@Override
 	public boolean deleteCustomer(int customerId) {
-		// TODO Auto-generated method stub
-		return false;
+		return cdao.deleteCustomer(customerId);
 	}
 
 	@Override
 	public boolean updateCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return false;
+		return cdao.updateCustomer(customer);
 	}
 
 	@Override
 	public Customer loadCustomer(int customerId) {
-		// TODO Auto-generated method stub
-		return null;
+		return cdao.loadCustomer(customerId);
 	}
 
 	@Override
 	public List<Customer> getCustomers(String zipCode) {
-		// TODO Auto-generated method stub
-		return null;
+		return cdao.getCustomers(zipCode);
 	}
 
 	@Override
 	public Map<String, Double> getMonthlySales(int year) {
-		// TODO Auto-generated method stub
-		return null;
+		return cdao.getMonthlySales(year);
 	}
 
 	@Override
 	public List<ReportBean> getReport(int month) {
-		// TODO Auto-generated method stub
-		return null;
+		return cdao.getReport(month);
 	}
-	
+
 }

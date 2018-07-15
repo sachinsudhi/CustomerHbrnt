@@ -16,6 +16,9 @@ import trng.hibernat.beans.*;
 public class CustomerDaoImplementation implements CustomerDao {
 	SessionFactory sf;
 	final static Logger logger = Logger.getLogger(CustomerDaoImplementation.class);
+	public CustomerDaoImplementation() {
+		sf = HibernateUtils.getSessionFactory();
+	}
 
 	@Override
 	public boolean addCustomer(Customer customer) {
@@ -65,7 +68,7 @@ public class CustomerDaoImplementation implements CustomerDao {
 			session.update(customer);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			logger.error("failed to execute deleteCustomer method", e);
+			logger.error("failed to execute updateCustomer method", e);
 			return false;
 		}
 		session.close();
@@ -83,7 +86,7 @@ public class CustomerDaoImplementation implements CustomerDao {
 			customer = (Customer) session.get(Customer.class, customerId);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			logger.error("failed to execute deleteCustomer method", e);
+			logger.error("failed to execute loadCustomer method", e);
 			return null;
 		}
 		session.close();

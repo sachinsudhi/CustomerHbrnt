@@ -20,72 +20,80 @@ import javax.validation.constraints.Email;
 import lombok.Data;
 
 @Entity
-@Table(name="Customers", uniqueConstraints= { 
-		@UniqueConstraint(columnNames="first_name") ,@UniqueConstraint(columnNames="last_name")		
-})
+@Table(name = "Customers", uniqueConstraints = { @UniqueConstraint(columnNames = "first_name"),
+		@UniqueConstraint(columnNames = "last_name") })
 
 @Data
-public final class Customer{
+public final class Customer {
 	@Id
 	@GeneratedValue
-	@Column(name="customer_id")
+	@Column(name = "customer_id")
 	private int customerID;
-	
-	@Column(name="title")
+
+	@Column(name = "title")
 	private String title;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String firstName;
-	
-	@Column(name="middle_name")
+
+	@Column(name = "middle_name")
 	private String middleName;
-	
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
-	
-	@Column(name="suffix")
+
+	@Column(name = "suffix")
 	private String suffix;
-	
-	@Email(message="Please Enter a valid email")
+
+	@Email(message = "Please Enter a valid email")
 	private String email;
-	
-	@Column(name="company")
+
+	@Column(name = "company")
 	private String company;
-	
-	@Column(name="display_name")
+
+	@Column(name = "display_name")
 	private String displayName;
-	
-	@Column(name="print_on_check")
+
+	@Column(name = "print_on_check")
 	private String printOnCheckAs;
-	
-	@Column(name="other_details")
+
+	@Column(name = "other_details")
 	private String otherDetails;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY) 
-	@JoinColumn(name="customer_id_fk")
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id_fk")
 	private List<Order> orders;
-	
+
 	@Embedded
-    @AttributeOverrides(value = {
-        @AttributeOverride(name = "billingStreet", column = @Column(name = "bill_street")),
-        @AttributeOverride(name = "billingCity", column = @Column(name = "bill_city")),
-        @AttributeOverride(name = "billingState", column = @Column(name = "bill_state")),
-        @AttributeOverride(name = "billingZIP", column = @Column(name = "bill_zip")),
-        @AttributeOverride(name = "billingCountry", column = @Column(name = "bill_country")),
-        @AttributeOverride(name = "shippingStreet", column = @Column(name = "ship_street")),
-        @AttributeOverride(name = "shippingCity", column = @Column(name = "ship_city")),
-        @AttributeOverride(name = "shippingState", column = @Column(name = "ship_state")),
-        @AttributeOverride(name = "shippingZIP", column = @Column(name = "ship_zip")),
-        @AttributeOverride(name = "shippingCountry", column = @Column(name = "ship_country"))
-    })
-    private Address address;
+	@AttributeOverrides(value = { @AttributeOverride(name = "billingStreet", column = @Column(name = "bill_street")),
+			@AttributeOverride(name = "billingCity", column = @Column(name = "bill_city")),
+			@AttributeOverride(name = "billingState", column = @Column(name = "bill_state")),
+			@AttributeOverride(name = "billingZIP", column = @Column(name = "bill_zip")),
+			@AttributeOverride(name = "billingCountry", column = @Column(name = "bill_country")),
+			@AttributeOverride(name = "shippingStreet", column = @Column(name = "ship_street")),
+			@AttributeOverride(name = "shippingCity", column = @Column(name = "ship_city")),
+			@AttributeOverride(name = "shippingState", column = @Column(name = "ship_state")),
+			@AttributeOverride(name = "shippingZIP", column = @Column(name = "ship_zip")),
+			@AttributeOverride(name = "shippingCountry", column = @Column(name = "ship_country")) })
+	private Address address;
 
 	public Customer() {
 		super();
 	}
-	
+
+	public Customer(int customerID, String firstName, String middleName, String lastName, List<Order> order,
+			Address address) {
+		super();
+		this.customerID = customerID;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.orders = order;
+		this.address = address;
+	}
+
 	public Customer(int customerID, String title, String firstName, String middleName, String lastName, String suffix,
-			String email, String company, String displayName, String printOnCheckAs,  String otherDetails) {
+			String email, String company, String displayName, String printOnCheckAs, String otherDetails) {
 		super();
 		this.customerID = customerID;
 		this.title = title;
@@ -100,9 +108,8 @@ public final class Customer{
 		this.otherDetails = otherDetails;
 	}
 
-
 	public Customer(int customerID, String title, String firstName, String middleName, String lastName, String suffix,
-			String email, String company, String displayName, String printOnCheckAs,  String otherDetails,
+			String email, String company, String displayName, String printOnCheckAs, String otherDetails,
 			List<Order> order) {
 		super();
 		this.customerID = customerID;
@@ -118,20 +125,9 @@ public final class Customer{
 		this.otherDetails = otherDetails;
 		this.orders = order;
 	}
-	
-	public Customer(int customerID, String firstName, String middleName, String lastName,
-			List<Order> order, Address address) {
-		super();
-		this.customerID = customerID;
-		this.firstName = firstName;
-		this.middleName = middleName;
-		this.lastName = lastName;
-		this.orders = order;
-		this.address=address;
-	}
-	
+
 	public Customer(int customerID, String title, String firstName, String middleName, String lastName, String suffix,
-			String email, String company, String displayName, String printOnCheckAs,  String otherDetails,
+			String email, String company, String displayName, String printOnCheckAs, String otherDetails,
 			List<Order> order, Address address) {
 		super();
 		this.customerID = customerID;
@@ -146,7 +142,7 @@ public final class Customer{
 		this.printOnCheckAs = printOnCheckAs;
 		this.otherDetails = otherDetails;
 		this.orders = order;
-		this.address=address;
+		this.address = address;
 	}
 
 }

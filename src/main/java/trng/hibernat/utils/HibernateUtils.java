@@ -3,13 +3,10 @@ package trng.hibernat.utils;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
   
 public class HibernateUtils {
   
     private static final SessionFactory sessionFactory = buildSessionFactory();
-    @SuppressWarnings("unused")
-	private static ServiceRegistry serviceRegistry;
     
     private static SessionFactory buildSessionFactory() {
 		try {
@@ -27,5 +24,14 @@ public class HibernateUtils {
     
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+    
+    public static void displayCustomerMenu() {
+    	System.out.println("1. ADD \n 2. DELETE \n 3. UPDATE \n 4. LOAD based on ID \n 5. GET list of customer from a zipCode \n "
+    			+ "6. GET monthly sales data for a given year \n 7. GET customer summary report for a month \n 8.Exit menu ");
+    }
+    
+    public static void displayOrderMenu() {
+    	System.out.println("1. ADD \n 2. DELETE \n 3. UPDATE \n 4. LOAD based on ID \n 5. GET an order entry by giving order object \n 6. Exit menu ");
     }
 }
