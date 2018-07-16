@@ -123,7 +123,7 @@ public class CustomerDaoImplementation implements CustomerDao {
 
 		session.beginTransaction();
 
-		Query query = session.createQuery("select new map(cast(month(o.paymentDate) as String), (op.quantity*op.price)) FROM Customer as c JOIN Orders as o JOIN OrderProducts op where year(o.paymentDate) =:yr");
+		Query query = session.createQuery("select new map(cast(month(o.paymentDate) as string), (op.quantity*op.price)) FROM Customer as c JOIN Orders as o JOIN OrderProducts as op where year(o.paymentDate) =:yr");
 		query.setParameter("yr", year);
 		@SuppressWarnings("unchecked")
 		Map<String, Double> monthlySales=(Map<String, Double>) query;
@@ -131,10 +131,7 @@ public class CustomerDaoImplementation implements CustomerDao {
 		session.getTransaction().commit();
 		session.close();
 
-		if (monthlySales != null && monthlySales.size() > 0) {
 			return monthlySales;
-		}
-		return null;
 	}
 
 	@Override
@@ -142,13 +139,13 @@ public class CustomerDaoImplementation implements CustomerDao {
 		sf = HibernateUtils.getSessionFactory();
         Session session = sf.openSession();
         
-        Query query =  session.createQuery("select new ReportBean(c.customerID, c.firstName, c.lastName from Customer as c, Orders as o where month(o.paymentDueDate)=:mnth");
+        Query query =  session.createQuery("select new trng.hibernat.beans.ReportBean(c.customerID, c.firstName, c.lastName) from Customer as c JOIN Orders as o where month(o.paymentDueDate)=:mnth");
         query.setParameter("mnth", month);
         List<ReportBean> reportBeans = query.list();
 
         session.close();
-        
-        return reportBeans;
+        	System.out.println("Report sent");
+             return reportBeans;
 	}
 
 }
