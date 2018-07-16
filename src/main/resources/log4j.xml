@@ -23,7 +23,7 @@
 		<level value="on" />
 	</logger>
 
-	<logger name="com.hbrnt.dao">
+	<logger name="trng.hibernat.dao">
 		<level value="DEBUG" />
 	</logger>
 	

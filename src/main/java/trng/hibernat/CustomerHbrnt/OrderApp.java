@@ -1,9 +1,12 @@
 package trng.hibernat.CustomerHbrnt;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
+import trng.hibernat.Entity.OrderProducts;
 import trng.hibernat.Entity.Orders;
 import trng.hibernat.service.OrderService;
 import trng.hibernat.service.OrderServiceImplementation;
@@ -55,8 +58,10 @@ public class OrderApp {
 		int oid = scanner.nextInt();
 		System.out.println("\nEnter order message:\n");
 		String message = scanner.next();
+		System.out.println(""+cid+oid+message);
 		Date d = Calendar.getInstance().getTime();
-		Orders ord = new Orders(oid, cid, d, d, d, message);
+		List<OrderProducts> op=new ArrayList<>();
+		Orders ord = new Orders(oid, cid, d, d, d, message, op);
 		oserv.createOrder(ord);	
 	}
 
@@ -75,7 +80,7 @@ public class OrderApp {
 		System.out.println("\nEnter order message:\n");
 		String message = scanner.next();
 		Date d = Calendar.getInstance().getTime();
-		Orders ord = new Orders(oid, cid, d, d, d, message);
+		Orders ord = new Orders(oid, d, d, d, message);
 		boolean result=oserv.updateOrder(ord);
 	   if(result)
 		   System.out.println("Success");

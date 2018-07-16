@@ -24,17 +24,18 @@ public class OrderDaoImplementation implements OrderDao{
 		logger.debug("Executing OrderDao::addOrder API" + order.getOrderID());
 		sf = HibernateUtils.getSessionFactory();
 		Session session = sf.openSession();
-
 		Transaction transaction = session.beginTransaction();
-
 		try {
 			session.save(order);
 			transaction.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Exception here");
 			logger.error("failed to execute addOrder method", e);
 			return false;
 		}
 		session.close();
+		System.out.println("Insert completed");
 		logger.debug("Completed executing OrderDao::addOrder API");
 		return true;
 	}

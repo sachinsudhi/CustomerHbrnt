@@ -32,6 +32,7 @@ public class CustomerDaoImplementation implements CustomerDao {
 			session.save(customer);
 			transaction.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error("failed to execute addCustomer method", e);
 			return false;
 		}

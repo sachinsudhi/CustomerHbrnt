@@ -62,19 +62,12 @@ public class CustomerApp {
 
 	public void insertCustomer() {
 		System.out.println("\nEnter Customer details:\n");
-		System.out.println("\nEnter Customer ID:\n");
-		int cid = scanner.nextInt();
 		System.out.println("\nEnter Customer first name:\n");
 		String cfname = scanner.next();
 		System.out.println("\nEnter Customer middle name:\n");
 		String cmname = scanner.next();
 		System.out.println("\nEnter Customer last name:\n");
 		String clname = scanner.next();
-		System.out.println("\nEnter Customer order details:\n");
-		System.out.println("\nEnter order ID:\n");
-		int oid = scanner.nextInt();
-		System.out.println("\nEnter order message:\n");
-		String message = scanner.next();
 		System.out.println("\nEnter Customer address:\n");
 		System.out.println("\nEnter street address:\n");
 		String street = scanner.next();
@@ -86,12 +79,12 @@ public class CustomerApp {
 		String zip = scanner.next();
 		System.out.println("\nEnter Country:\n");
 		String country = scanner.next();
-		Date d = Calendar.getInstance().getTime();
-		Orders ord = new Orders(oid, cid, d, d, d, message);
-		List<Orders> od = new ArrayList<>();
-		od.add(ord);
-		Address address = new Address(street, city, state, zip, country);
-		Customer customer = new Customer(cid, cfname, cmname, clname, od, address);
+		//Date d = Calendar.getInstance().getTime();
+		//Orders ord = new Orders(oid, d, d, d, message);
+		//List<Orders> od = new ArrayList<>();
+		//od.add(ord);
+		Address address = new Address(street, city, state, zip, country,street, city, state, zip, country);
+		Customer customer = new Customer(cfname, cmname, clname, address);
 		cserv.addCustomer(customer);
 	}
 
@@ -111,11 +104,6 @@ public class CustomerApp {
 		String cmname = scanner.next();
 		System.out.println("\nEnter Customer last name:\n");
 		String clname = scanner.next();
-		System.out.println("\nEnter Customer order details:\n");
-		System.out.println("\nEnter order ID:\n");
-		int oid = scanner.nextInt();
-		System.out.println("\nEnter order message:\n");
-		String message = scanner.next();
 		System.out.println("\nEnter Customer address:\n");
 		System.out.println("\nEnter street address:\n");
 		String street = scanner.next();
@@ -127,12 +115,12 @@ public class CustomerApp {
 		String zip = scanner.next();
 		System.out.println("\nEnter Country:\n");
 		String country = scanner.next();
-		Date d = Calendar.getInstance().getTime();
-		Orders ord = new Orders(oid, cid, d, d, d, message);
-		List<Orders> od = new ArrayList<>();
-		od.add(ord);
+		//Date d = Calendar.getInstance().getTime();
+		//Orders ord = new Orders(oid,d, d, d, message);
+		//List<Orders> od = new ArrayList<>();
+		//od.add(ord);
 		Address address = new Address(street, city, state, zip, country);
-		Customer customer = new Customer(cid, cfname, cmname, clname, od, address);
+		Customer customer = new Customer(cfname, cmname, clname, address);
 		cserv.updateCustomer(customer);
 	}
 

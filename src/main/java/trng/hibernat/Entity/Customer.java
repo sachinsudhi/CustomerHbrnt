@@ -81,14 +81,12 @@ public final class Customer {
 		super();
 	}
 
-	public Customer(int customerID, String firstName, String middleName, String lastName, List<Orders> order,
+	public Customer(String firstName, String middleName, String lastName,
 			Address address) {
 		super();
-		this.customerID = customerID;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
-		this.orders = order;
 		this.address = address;
 	}
 
