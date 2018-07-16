@@ -67,7 +67,7 @@ public final class Customer {
 	
 
 	@Embedded
-	@AttributeOverrides(value = { @AttributeOverride(name = "billingStreet", column = @Column(name = "bill_street")),
+	/*@AttributeOverrides(value = { @AttributeOverride(name = "billingStreet", column = @Column(name = "bill_street")),
 			@AttributeOverride(name = "billingCity", column = @Column(name = "bill_city")),
 			@AttributeOverride(name = "billingState", column = @Column(name = "bill_state")),
 			@AttributeOverride(name = "billingZIP", column = @Column(name = "bill_zip")),
@@ -76,7 +76,7 @@ public final class Customer {
 			@AttributeOverride(name = "shippingCity", column = @Column(name = "ship_city")),
 			@AttributeOverride(name = "shippingState", column = @Column(name = "ship_state")),
 			@AttributeOverride(name = "shippingZIP", column = @Column(name = "ship_zip")),
-			@AttributeOverride(name = "shippingCountry", column = @Column(name = "ship_country")) })
+			@AttributeOverride(name = "shippingCountry", column = @Column(name = "ship_country")) })*/
 	private Address address;
 
 	public Customer() {

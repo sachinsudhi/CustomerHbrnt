@@ -101,7 +101,7 @@ public class CustomerDaoImplementation implements CustomerDao {
 
 		session.beginTransaction();
 
-		Query query = session.createQuery("FROM Customer where billingZip=:zip");
+		Query query = session.createQuery("FROM Customer as c where c.address.billingZIP=:zip");
 		query.setParameter("zip", zipCode);
 		@SuppressWarnings("unchecked")
 		List<Customer> customersList = query.list();
@@ -123,7 +123,7 @@ public class CustomerDaoImplementation implements CustomerDao {
 
 		session.beginTransaction();
 
-		Query query = session.createQuery("select new map(cast(month(o.paymentDate) as String), (op.quantity*op.price)) FROM Customer as c JOIN Order as o JOIN OrderProducts op where year(o.paymentDate) =:yr");
+		Query query = session.createQuery("select new map(cast(month(o.paymentDate) as String), (op.quantity*op.price)) FROM Customer as c JOIN Orders as o JOIN OrderProducts op where year(o.paymentDate) =:yr");
 		query.setParameter("yr", year);
 		@SuppressWarnings("unchecked")
 		Map<String, Double> monthlySales=(Map<String, Double>) query;
@@ -142,7 +142,7 @@ public class CustomerDaoImplementation implements CustomerDao {
 		sf = HibernateUtils.getSessionFactory();
         Session session = sf.openSession();
         
-        Query query =  session.createQuery("select new ReportBean(c.customerID, c.firstName, c.lastName from Customer as c, Order as o where month(o.paymentDueDate)=:mnth");
+        Query query =  session.createQuery("select new ReportBean(c.customerID, c.firstName, c.lastName from Customer as c, Orders as o where month(o.paymentDueDate)=:mnth");
         query.setParameter("mnth", month);
         List<ReportBean> reportBeans = query.list();
 

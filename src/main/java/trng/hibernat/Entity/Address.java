@@ -1,5 +1,6 @@
 package trng.hibernat.Entity;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import lombok.Data;
@@ -7,15 +8,33 @@ import lombok.Data;
 @Embeddable
 @Data
 public class Address{
+	@Column(name = "bill_street")
 	private String billingStreet;
+	
+	@Column(name = "bill_city")
 	private String billingCity;
+	
+	@Column(name = "bill_state")
 	private String billingState;
+	
+	@Column(name = "bill_zip")
 	private String billingZIP;
+	
+	@Column(name = "bill_country")
 	private String billingCountry;
+	
+	@Column(name = "ship_street")
 	private String shippingStreet;
+	@Column(name = "ship_city")
 	private String shippingCity;
+	
+	@Column(name = "ship_state")
 	private String shippingState;
+	
+	@Column(name = "ship_zip")
 	private String shippingZIP;
+	
+	@Column(name = "ship_country")
 	private String shippingCountry;
 	
 	public Address() {
