@@ -79,19 +79,23 @@ public class CustomerApp {
 		String zip = scanner.next();
 		System.out.println("\nEnter Country:\n");
 		String country = scanner.next();
-		//Date d = Calendar.getInstance().getTime();
-		//Orders ord = new Orders(oid, d, d, d, message);
-		//List<Orders> od = new ArrayList<>();
-		//od.add(ord);
 		Address address = new Address(street, city, state, zip, country,street, city, state, zip, country);
 		Customer customer = new Customer(cfname, cmname, clname, address);
-		cserv.addCustomer(customer);
+		boolean result=cserv.addCustomer(customer);
+		if(result)
+			   System.out.println("Success");
+		   else
+			   System.out.println("Failure");
 	}
 
 	public void removeCustomer() {
 		System.out.println("\nEnter customer Id of the customer to be deleted:\n");
 		int cid = scanner.nextInt();
-		cserv.deleteCustomer(cid);
+		boolean result=cserv.deleteCustomer(cid);
+		if(result)
+			   System.out.println("Success");
+		   else
+			   System.out.println("Failure");
 	}
 
 	public void changeCustomer() {
@@ -115,20 +119,24 @@ public class CustomerApp {
 		String zip = scanner.next();
 		System.out.println("\nEnter Country:\n");
 		String country = scanner.next();
-		//Date d = Calendar.getInstance().getTime();
-		//Orders ord = new Orders(oid,d, d, d, message);
-		//List<Orders> od = new ArrayList<>();
-		//od.add(ord);
-		Address address = new Address(street, city, state, zip, country);
+		Address address = new Address(street, city, state, zip, country, street, city, state, zip, country);
 		Customer customer = new Customer(cfname, cmname, clname, address);
-		cserv.updateCustomer(customer);
+		customer.setCustomerID(cid);
+		boolean result=cserv.updateCustomer(customer);
+		if(result)
+			   System.out.println("Success");
+		   else
+			   System.out.println("Failure");
 	}
 
 	public void loadCustomer() {
 		System.out.println("\nEnter customer Id of the customer to be loaded:\n");
 		int cid = scanner.nextInt();
 		Customer c=cserv.loadCustomer(cid);
-		c.toString();
+		System.out.println("Customer ID: "+c.getCustomerID());
+		System.out.println("First Name: "+c.getFirstName());
+		System.out.println("Middle Name: "+c.getMiddleName());
+		System.out.println("Last Name: "+c.getLastName());
 	}
 
 	public void getCustomersList() {
@@ -142,9 +150,9 @@ public class CustomerApp {
 		System.out.println("\nEnter year to get monthly sales summary for all 12 months of the year:\n");
 		int year = scanner.nextInt();
 		Map<String, Double> salesMap = cserv.getMonthlySales(year);
-		while (i < salesMap.size()) {
-			System.out.println(salesMap.toString());
-			i++;
+		for(Map.Entry entry: salesMap.entrySet()) {
+			System.out.println("Month: "+entry.getKey());
+			System.out.println("Sales: "+entry.getValue());
 		}
 	}
 

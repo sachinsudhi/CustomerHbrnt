@@ -6,18 +6,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import trng.hibernat.Entity.Customer;
 import trng.hibernat.Entity.OrderProducts;
 import trng.hibernat.Entity.Orders;
+import trng.hibernat.service.CustomerService;
+import trng.hibernat.service.CustomerServiceImplementation;
 import trng.hibernat.service.OrderService;
 import trng.hibernat.service.OrderServiceImplementation;
 import trng.hibernat.utils.HibernateUtils;
 
 public class OrderApp {
 	OrderService oserv;
+	CustomerService cserv;
 	static Scanner scanner;
 
 	public OrderApp() {
 		oserv = new OrderServiceImplementation();
+		cserv=new CustomerServiceImplementation();
 		scanner = new Scanner(System.in);
 	}
 
@@ -52,23 +57,27 @@ public class OrderApp {
 
 	public void insertOrder() {
 		System.out.println("\nEnter Customer order details:\n");
-		System.out.println("\nEnter customer ID:\n");
-		int cid = scanner.nextInt();
-		System.out.println("\nEnter order ID:\n");
-		int oid = scanner.nextInt();
 		System.out.println("\nEnter order message:\n");
 		String message = scanner.next();
-		System.out.println(""+cid+oid+message);
 		Date d = Calendar.getInstance().getTime();
-		List<OrderProducts> op=new ArrayList<>();
-		Orders ord = new Orders(oid, cid, d, d, d, message, op);
-		oserv.createOrder(ord);	
+		Customer c=new Customer();
+		cserv.addCustomer(c);
+		Orders ord = new Orders(c.getCustomerID(),d, d, d, message);
+		boolean result=oserv.createOrder(ord);	
+		if(result)
+			   System.out.println("Success");
+		   else
+			   System.out.println("Failure");
 	}
 
 	public void removeOrder() {
 		System.out.println("\nEnter order Id of the order to be deleted:\n");
 		Long oid = (long) scanner.nextInt();
-		oserv.deleteOrder(oid);
+		boolean result=oserv.deleteOrder(oid);
+		if(result)
+			   System.out.println("Success");
+		   else
+			   System.out.println("Failure");
 	}
 
 	public void changeOrder() {
@@ -80,7 +89,8 @@ public class OrderApp {
 		System.out.println("\nEnter order message:\n");
 		String message = scanner.next();
 		Date d = Calendar.getInstance().getTime();
-		Orders ord = new Orders(oid, d, d, d, message);
+		Orders ord = new Orders(cid, d, d, d, message);
+		ord.setOrderID(oid);
 		boolean result=oserv.updateOrder(ord);
 	   if(result)
 		   System.out.println("Success");
@@ -93,6 +103,6 @@ public class OrderApp {
 		int oid = scanner.nextInt();
 		Orders ord=new Orders(oid);
 		Orders o=oserv.getOrder(ord);
-		o.toString();
+		System.out.println("Order message: "+o.getCustomMessage());
 	}
 }

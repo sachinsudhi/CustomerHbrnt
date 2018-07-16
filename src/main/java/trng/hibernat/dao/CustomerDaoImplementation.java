@@ -101,12 +101,13 @@ public class CustomerDaoImplementation implements CustomerDao {
 
 		session.beginTransaction();
 
-		Query query = session.createQuery("FROM Customer where shippingZip=:zip");
+		Query query = session.createQuery("FROM Customer where billingZip=:zip");
 		query.setParameter("zip", zipCode);
 		@SuppressWarnings("unchecked")
 		List<Customer> customersList = query.list();
 
 		session.getTransaction().commit();
+		
 		session.close();
 
 		if (customersList != null && customersList.size() > 0) {

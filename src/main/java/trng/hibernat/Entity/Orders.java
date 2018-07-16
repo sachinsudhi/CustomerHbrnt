@@ -58,12 +58,22 @@ public class Orders {
 		this.orderID = orderID;
 	}
 	
-	public Orders(int orderID, Date invoiceCreationDate, Date deliveryDueDate, Date paymentDueDate,
+	public Orders(int customerID, Date invoiceCreationDate, Date deliveryDueDate, Date paymentDueDate,
 			String customMessage) {
 		super();
-		this.orderID = orderID;
+		this.customerId=customerID;
 		this.invoiceCreationDate = invoiceCreationDate;
 		this.deliveryDueDate = deliveryDueDate;
+		this.paymentDueDate = paymentDueDate;
+		this.customMessage = customMessage;
+	}
+	
+	
+	public Orders(Date invoiceCreationDate, Date deliveryDueDate,Date paymentDueDate,
+			String customMessage) {
+		super();
+		this.invoiceCreationDate = invoiceCreationDate;
+		this.deliveryDueDate = paymentDueDate;
 		this.paymentDueDate = paymentDueDate;
 		this.customMessage = customMessage;
 	}

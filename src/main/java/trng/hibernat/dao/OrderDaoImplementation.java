@@ -29,8 +29,6 @@ public class OrderDaoImplementation implements OrderDao{
 			session.save(order);
 			transaction.commit();
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Exception here");
 			logger.error("failed to execute addOrder method", e);
 			return false;
 		}
@@ -44,10 +42,10 @@ public class OrderDaoImplementation implements OrderDao{
 	public boolean deleteOrder(Long orderId) {
 		sf = HibernateUtils.getSessionFactory();
 		Session session = sf.openSession();
-
+		
 		session.beginTransaction();
 		try {
-			Orders order = (Orders) session.load(Orders.class, orderId);
+			Orders order = (Orders) session.load(Orders.class,orderId.intValue());
 			session.delete(order);
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -82,7 +80,7 @@ public class OrderDaoImplementation implements OrderDao{
 
 		session.beginTransaction();
         int orderId=order.getOrderID();
-		Query query = session.createQuery("FROM ORDER where orderID=:ord");
+		Query query = session.createQuery("FROM Orders where orderID=:ord");
 		query.setParameter("ord", orderId);
 		@SuppressWarnings("unchecked")
 		List<Orders> ordersList = query.list();

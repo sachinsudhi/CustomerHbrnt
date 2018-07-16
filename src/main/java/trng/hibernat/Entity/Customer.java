@@ -60,9 +60,11 @@ public final class Customer {
 	@Column(name = "other_details")
 	private String otherDetails;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer_id_fk")
 	private List<Orders> orders;
+	
+	
 
 	@Embedded
 	@AttributeOverrides(value = { @AttributeOverride(name = "billingStreet", column = @Column(name = "bill_street")),
@@ -141,6 +143,14 @@ public final class Customer {
 		this.otherDetails = otherDetails;
 		this.orders = order;
 		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [customerID=" + customerID + ", title=" + title + ", firstName=" + firstName + ", middleName="
+				+ middleName + ", lastName=" + lastName + ", suffix=" + suffix + ", email=" + email + ", company="
+				+ company + ", displayName=" + displayName + ", printOnCheckAs=" + printOnCheckAs + ", otherDetails="
+				+ otherDetails + ", orders=" + orders + ", address=" + address + "]";
 	}
 
 }
