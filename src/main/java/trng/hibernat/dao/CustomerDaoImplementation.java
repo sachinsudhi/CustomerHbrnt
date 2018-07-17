@@ -1,5 +1,6 @@
 package trng.hibernat.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.transform.Transformers;
 
 import trng.hibernat.utils.HibernateUtils;
 import trng.hibernat.Entity.Customer;
@@ -123,14 +125,18 @@ public class CustomerDaoImplementation implements CustomerDao {
 
 		session.beginTransaction();
 
-		Query query = session.createQuery("select new map(cast(month(o.paymentDate) as string), (op.quantity*op.price)) FROM Customer as c JOIN Orders as o JOIN OrderProducts as op where year(o.paymentDate) =:yr");
+		Query query = session.createQuery("select month(o.paymentDueDate) , SUM(op.quantity*op.price) FROM Orders as o, OrderProducts as op where o.orderID=op.orderId and year(o.paymentDueDate) =:yr group by month(o.paymentDueDate)");
 		query.setParameter("yr", year);
-		@SuppressWarnings("unchecked")
-		Map<String, Double> monthlySales=(Map<String, Double>) query;
-
+		List<List<Object>> listOfSales=query.setResultTransformer(Transformers.TO_LIST).list();
+		Map<String, Double> monthlySales=new HashMap<>();
+		for(List<Object> l:listOfSales) {
+			monthlySales.put((l.get(0)).toString(), (Double)l.get(1));
+		}
+		if(monthlySales==null || monthlySales.size()==0)
+			System.out.println("No such customer exists in the datastore");
 		session.getTransaction().commit();
 		session.close();
-
+         
 			return monthlySales;
 	}
 
@@ -139,7 +145,7 @@ public class CustomerDaoImplementation implements CustomerDao {
 		sf = HibernateUtils.getSessionFactory();
         Session session = sf.openSession();
         
-        Query query =  session.createQuery("select new trng.hibernat.beans.ReportBean(c.customerID, c.firstName, c.lastName) from Customer as c JOIN Orders as o where month(o.paymentDueDate)=:mnth");
+        Query query =  session.createQuery("select new trng.hibernat.beans.ReportBean(c.customerID, c.firstName, c.lastName) from Customer as c,Orders as o where c.customerID=o.customerId and month(o.paymentDueDate)=:mnth");
         query.setParameter("mnth", month);
         List<ReportBean> reportBeans = query.list();
 

@@ -150,6 +150,7 @@ public class CustomerApp {
 		System.out.println("\nEnter year to get monthly sales summary for all 12 months of the year:\n");
 		int year = scanner.nextInt();
 		Map<String, Double> salesMap = cserv.getMonthlySales(year);
+		
 		for(Map.Entry entry: salesMap.entrySet()) {
 			System.out.println("Month: "+entry.getKey());
 			System.out.println("Sales: "+entry.getValue());
@@ -159,6 +160,8 @@ public class CustomerApp {
 	public void getSummaryReport() {
 		System.out.println("\nEnter the month to get customer summary for the month:\n");
 		int month = scanner.nextInt();
+		if(cserv.getReport(month)==null || cserv.getReport(month).size()==0)
+			System.out.println("No such customer exists in the datastore");
 		cserv.getReport(month).stream().forEach(System.out::println);
 	}
 }
